@@ -22,7 +22,7 @@ app.set('HOST', process.env.HOST || 'localhost'); // Default to '0.0.0.0'
 // MongoDB URI
 const mongoURI = process.env.MONGO_DB_URI;
 if (!mongoURI) {
-    console.error("Mongo URI is missing in .env file");
+    console.error("Mongo URI is missing inS .env file");
     process.exit(1);
 }
 mongoose_1.default.connect(mongoURI, {}).then(() => {

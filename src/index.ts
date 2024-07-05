@@ -15,8 +15,8 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('PORT', process.env.PORT || 3000);
-app.set('HOST', process.env.HOST || 'localhost'); // Default to '0.0.0.0'
+// app.set('PORT', process.env.PORT || 3000);
+// app.set('HOST', process.env.HOST || 'localhost'); // Default to '0.0.0.0'
 
 // MongoDB URI
 const mongoURI = process.env.MONGO_DB_URI;
@@ -36,9 +36,10 @@ mongoose.connect(mongoURI, {}).then(() => {
 app.use("/api/v1", router);
 
 // Starting server
+const port = 8000;
 try {
-    server.listen(app.get('PORT'), app.get('HOST'), () => {
-        console.log(`Server is running on http://${app.get('HOST')}:${app.get('PORT')}`);
+    server.listen(port, () => {
+        console.log(`Server is running on http://127.0.0.1:${port}`);
     });
 } catch (error) {
     console.error(`Error while starting server: ${error}`);
