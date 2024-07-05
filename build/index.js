@@ -10,15 +10,16 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const routes_1 = __importDefault(require("./routes/routes"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const mongoose_1 = __importDefault(require("mongoose"));
+dotenv_1.default.config();
 const app = (0, express_1.default)();
 const server = http_1.default.createServer(app);
-//express configuration
+// Express configuration
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.set('PORT', process.env.PORT || 3000);
-app.set('HOST', process.env.HOST || 'localhost');
-dotenv_1.default.config();
+app.set('HOST', process.env.HOST || 'localhost'); // Default to '0.0.0.0'
+// MongoDB URI
 const mongoURI = process.env.MONGO_DB_URI;
 if (!mongoURI) {
     console.error("Mongo URI is missing in .env file");
@@ -30,9 +31,9 @@ mongoose_1.default.connect(mongoURI, {}).then(() => {
     console.error("Error while connecting to MongoDB", error);
     process.exit(1);
 });
-//defining routes
+// Defining routes
 app.use("/api/v1", routes_1.default);
-//starting server
+// Starting server
 try {
     server.listen(app.get('PORT'), app.get('HOST'), () => {
         console.log(`Server is running on http://${app.get('HOST')}:${app.get('PORT')}`);
