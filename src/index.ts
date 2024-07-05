@@ -15,13 +15,13 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('PORT', 3000);
+app.set('PORT', process.env.PORT || 3000);
 app.set('HOST', process.env.HOST || 'localhost'); // Default to '0.0.0.0'
 
 // MongoDB URI
 const mongoURI = process.env.MONGO_DB_URI;
 if (!mongoURI) {
-    console.error("Mongo URI is missing in .env file");
+    console.error("Mongo URI is missing inS .env file");
     process.exit(1);
 }
 
