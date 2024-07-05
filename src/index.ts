@@ -37,7 +37,7 @@ app.use("/api/v1", router);
 
 // Starting server
 try {
-    server.listen(3000, app.get('HOST'), () => {
+    server.listen(app.get('PORT'), app.get('HOST'), () => {
         console.log(`Server is running on http://${app.get('HOST')}:${app.get('PORT')}`);
     });
 } catch (error) {
